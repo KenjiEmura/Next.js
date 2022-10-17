@@ -13,10 +13,9 @@ async function handler(req, res) {
     };
 
     const response = await fetch(
-      "https://react-dummy-project.app/meetups.json",
+      "https://react-dummy-project.firebasedatabase.app/meetups.json",
       httpRequestConfig
     );
-    console.log("Response: ", response);
 
     res.status(201).json({ message: "Meetup saved!" });
   }

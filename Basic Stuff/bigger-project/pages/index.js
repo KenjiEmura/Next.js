@@ -35,9 +35,27 @@ export async function getServerSideProps(context) {
   const req = context.req;
   const res = context.res;
   // fetch data from API or do stuff
+
+  const response = await fetch(
+    "https://react-dummy-project.firebasedatabase.app/meetups.json",
+    { method: "GET" }
+  );
+  const data = await response.json();
+
+  let transformedData = [];
+  for (const key in data) {
+    transformedData.push({
+      id: key,
+      title: data[key].title,
+      image: data[key].image,
+      address: data[key].address,
+      description: data[key].description,
+    });
+  }
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: transformedData,
     },
   };
 }
